@@ -29,7 +29,6 @@ func TestMain(m *testing.M) {
 	defer func() { os.Exit(m.Run()) }()
 }
 
-// nolint:paralleltest
 func TestReplyMessage_noReply(t *testing.T) {
 	client := reply.NewClient([]reply.Replier{})
 
@@ -68,7 +67,6 @@ func TestReplyMessage_noReply(t *testing.T) {
 	}
 }
 
-// nolint:paralleltest
 func TestReplyMessage_regularQuestion(t *testing.T) {
 	client := reply.NewClient([]reply.Replier{})
 
@@ -111,7 +109,6 @@ func TestReplyMessage_regularQuestion(t *testing.T) {
 	}
 }
 
-// nolint:paralleltest
 func TestReplyMessage_indagation(t *testing.T) {
 	client := reply.NewClient([]reply.Replier{})
 
@@ -169,19 +166,17 @@ func TestReplyMessage_indagation(t *testing.T) {
 	}
 }
 
-// nolint:paralleltest
 func TestReplyMessage_customReplier(t *testing.T) {
 	client := reply.NewClient([]reply.Replier{
 		&CustomReplier{},
 	})
 
-	want := "custom my message"
 	got, err := client.GetReply(&reply.MessagePayload{Text: "my message"})
 	if err != nil {
 		t.Fatalf("GetReply returned err = %v", err)
 	}
 
-	if got.Text != want {
+	if want := "custom my message"; got.Text != want {
 		t.Fatalf("GetReply did not use custom replier got %v want %v", got.Text, want)
 	}
 }

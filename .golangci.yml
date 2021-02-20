@@ -12,6 +12,7 @@ linters:
     - gomnd
     - nestif
     - nlreturn
+    - paralleltest
     - wrapcheck
     - wsl
 
